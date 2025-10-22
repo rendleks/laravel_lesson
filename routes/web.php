@@ -13,34 +13,29 @@ use App\Http\Controllers\Post\EditController;
 use App\Http\Controllers\Post\UpdateController;
 use App\Http\Controllers\Post\DestroyController;
 
+use App\Http\Controllers\Admin\Post\IndexController as AdminPostIndexController;
+
 Route::get('/posts', IndexController::class )->name('post.index');
 Route::get('/posts/create', CreateController::class)->name('post.create');
 
-Route::post('/posts/create', StoreController::class)->name('post.store');
+Route::post('/posts/store', StoreController::class)->name('post.store');
 Route::get('/posts/{post}', ShowController::class)->name('post.show');
 Route::get('/posts/{post}/edit', EditController::class)->name('post.edit');
 Route::patch('/posts/{post}', UpdateController::class)->name('post.update');
 Route::delete('/posts/{post}', DestroyController::class)->name('post.delete');
 
-
-//Route::get('/posts', [PostController::class, 'index'])->name('post.index');
-//Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
-//
-//Route::post('/posts', [PostController::class, 'store'])->name('post.store');
-//Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
-//Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
-//Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
-//Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
-
-//
-//Route::get('/posts/update', [PostController::class, 'update']);
-//Route::get('/posts/delete', [PostController::class, 'delete']);
-//Route::get('/posts/first_or_create', [PostController::class, 'firstOrCreate']);
-//Route::get('/posts/update_or_create', [PostController::class, 'updateOrCreate']);
-//
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
 Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+
+//Route::get('/post', App\Http\Controllers\Admin\Post\IndexController::class)->name('admin.post.index');
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/post', AdminPostIndexController::class)->name('admin.post.index');
+    });
+});
+
 
 
 
