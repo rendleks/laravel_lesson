@@ -12,6 +12,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        dd(1111111);
+        dd('nnnnn');
+//        return view('admin.post.index');
     }
 }
