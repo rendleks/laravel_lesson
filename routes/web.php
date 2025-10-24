@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
@@ -13,6 +15,9 @@ use App\Http\Controllers\Post\DestroyController;
 
 use App\Http\Controllers\Admin\Post\IndexController as IndexAdmin;
 use Illuminate\Support\Facades\Route;
+
+
+Route::get("/", [HomeController::class, 'index']);
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
    Route::group(['namespace' => 'Post'], function() {
@@ -43,3 +48,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
