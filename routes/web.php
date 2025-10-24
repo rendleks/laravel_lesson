@@ -3,8 +3,6 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\IndexController;
 use App\Http\Controllers\Post\StoreController;
@@ -14,14 +12,13 @@ use App\Http\Controllers\Post\UpdateController;
 use App\Http\Controllers\Post\DestroyController;
 
 use App\Http\Controllers\Admin\Post\IndexController as IndexAdmin;
+use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
-    Route::group(['namespace' => 'Post'], function () {
-        Route::get('/post', IndexAdmin::class)->name('admin.post.index');
-    });
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
+   Route::group(['namespace' => 'Post'], function() {
+      Route::get("/post", [IndexAdmin::class, '__invoke'])->name("admin.post.index");
+   });
 });
-
-
 
 Route::get('/posts', IndexController::class)->name('post.index');
 Route::get('/posts/create', CreateController::class)->name('post.create');
