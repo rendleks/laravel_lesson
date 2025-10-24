@@ -17,9 +17,9 @@ use App\Http\Controllers\Admin\Post\IndexController as IndexAdmin;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get("/", [HomeController::class, 'index']);
+Route::get("/", [HomeController::class, 'index'])->name('home');
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function() {
    Route::group(['namespace' => 'Post'], function() {
       Route::get("/post", [IndexAdmin::class, '__invoke'])->name("admin.post.index");
    });
