@@ -28,7 +28,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admi
 Route::get('/posts', IndexController::class)->name('post.index');
 Route::get('/posts/create', CreateController::class)->name('post.create');
 
-Route::post('/posts/store', StoreController::class)->name('post.store');
+Route::post('/posts', StoreController::class)->name('post.store');
 Route::get('/posts/{post}', ShowController::class)->name('post.show');
 Route::get('/posts/{post}/edit', EditController::class)->name('post.edit');
 Route::patch('/posts/{post}', UpdateController::class)->name('post.update');
