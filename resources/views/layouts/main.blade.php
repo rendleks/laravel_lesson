@@ -20,13 +20,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about.index') }}">About</a>
                 </li>
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('main.index') }}">Main</a>
                 </li>
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('post.index') }}">Posts</a>
                 </li>
-
+                @can('view', auth()->user())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.post.index') }}">Admin</a>
+                    </li>
+                @endcan
             </ul>
 
         </nav>

@@ -12,6 +12,8 @@ class IndexController extends BaseController
     public function __invoke(FilterRequest $request)
     {
 
+
+
         $data = $request->validated();
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
         $posts = Post::filter($filter)->paginate(10);
