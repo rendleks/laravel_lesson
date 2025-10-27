@@ -12,11 +12,17 @@ class UpdateController extends BaseController
     public function __invoke(UpdateRequest $request, Post $post)
     {
         $data = $request->validated();
-
         $post = $this->service->update($post, $data);
 
-        return new PostResource($post);
-
+        if ($post instanceof Post) {
+            if ($request->wantsJson() || $request->is('api/*')) {
+                return new PostResource($post);
+            }
+            return redirect()->route('post.show', $post->id);
+        } else {
+            return $post;
+        }
+//        return new PostResource($post);
 //        return redirect()->route('post.show', $post->id);
     }
 }
